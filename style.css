@@ -1,0 +1,134 @@
+/* Fullscreen background with blur effect */
+body {
+    background-image: url("https://wallpaperaccess.com/full/7825048.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif; /* Font style */
+}
+
+/* Stylish form container with glassmorphism effect */
+.form {
+    width: 350px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.2); /* Slightly lighter background */
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: all 0.3s ease; 
+}
+
+/* Hover effect on form */
+.form:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Label container to make labels appear on the same line */
+.label-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#backtologin
+{
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(25, 118, 210, 0.7); /* Bright blue for action */
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+
+}
+#backtologin:hover
+{
+    background: rgba(167, 13, 144, 0.5); /* Lighter hover effect */
+    transform: scale(1.05);
+}
+/* Beautiful labels */
+.label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+    width: 35%; /* Ensure both labels fit within the container */
+    transition: background 0.3s, transform 0.2s;
+}
+#test
+{
+    width: 100%;
+    /* margin-left: 50px; */
+}
+/* Hover effect on labels */
+.label:hover {
+    background: rgba(63, 81, 181, 0.5); /* Lighter hover effect */
+    transform: scale(1.05);
+}
+
+/* Input fields with smooth design */
+.input {
+    width: 90%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(63, 81, 181, 0.3); /* Subtle blue tone */
+    backdrop-filter: blur(5px);
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    margin-bottom: 15px;
+    text-align: center;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Placeholder text color */
+.input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Hover effect on input fields */
+.input:hover {
+    background: rgba(63, 81, 181, 0.5); /* Lighter hover effect */
+    transform: scale(1.05);
+}
+
+/* Stylish submit button */
+#submit {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(25, 118, 210, 0.7); /* Bright blue for action */
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Hover effect on submit button */
+#submit:hover {
+    background: rgba(25, 118, 210, 0.9);
+    transform: scale(1.05);
+}

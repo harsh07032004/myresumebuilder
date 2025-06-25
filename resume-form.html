@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 90px 100px;
+            flex-direction: row-reverse; 
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+         .resume
+         {
+            display: flex;
+         }
+        .container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 60px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #6a11cb;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #2575fc;
+        }
+
+        /* Resume Output */
+        @media (max-width: 480px) {
+            .container {
+                max-height: 80vh;
+                padding: 15px;
+            }
+            .btn {
+                font-size: 14px;
+            }
+        }
+
+        .resumeOutput {
+            padding: 10px;
+            margin-left: 10px;
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 400px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .resumeOutput span {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume">
+        <div class="container">
+            <h2>Resume form</h2>
+            <form id="resumeForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="summary">Summary</label>
+                    <textarea id="summary" name="summary" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="skills">Skills</label>
+                    <textarea id="skills" name="skills" placeholder="E.g., JavaScript, Python, Machine Learning" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="education">Education</label>
+                    <textarea id="education" name="education" placeholder="E.g., B.Tech in Computer Science - XYZ University" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="experience">Experience</label>
+                    <textarea id="experience" name="experience" placeholder="Previous job roles, internships, or projects" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="projects">Projects</label>
+                    <textarea id="projects" name="projects" placeholder="List your projects with brief descriptions"></textarea>
+                </div>
+                <button type="submit" class="btn">Generate Resume</button>
+            </form>
+        </div>
+
+        <!-- Resume Output -->
+        <div class="resumeOutput">
+            <span>Generated LaTeX Code:</span>
+            <pre id="latexOutput"></pre>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("resumeForm").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Prevent the form from reloading the page
+
+            // Capture the form data
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const summary = document.getElementById("summary").value;
+            const skills = document.getElementById("skills").value;
+            const education = document.getElementById("education").value;
+            const experience = document.getElementById("experience").value;
+            const projects = document.getElementById("projects").value;
+
+            const url = 'https://magicloops.dev/api/loop/3b8ada98-7b7e-49e0-83c8-4924ec84e8f3/run';
+
+            try {
+                // Making the API call with the form data
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        summary: summary,
+                        skills: skills,
+                        education: education,
+                        experience: experience,
+                        projects: projects
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const responseJson = await response.json();
+
+                // Log the entire response to see the structure
+                console.log(responseJson);
+
+                // Extract the LaTeX code from the response
+                const latexCode = responseJson.overleaf_code;
+                console.log(latexCode);
+
+                // Check if LaTeX code is available
+                if (latexCode) {
+                    const resumeOutput = document.getElementById("resumeOutput");
+                    
+
+                    // Insert the LaTeX code into the page
+                    document.getElementById("latexOutput").textContent = latexCode;
+                } else {
+                    console.error('LaTeX code not found in the API response');
+                }
+
+            } catch (error) {
+                console.error('Error:', error.message);
+            }
+        });
+    </script>
+</body>
+</html>
